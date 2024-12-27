@@ -115,12 +115,12 @@ li:hover {
 .edit {
     background-color: black;
     color: white;
-    width: 100vw; /* Occupe la largeur de la fenêtre */
+    width: 100vw; 
     height: 50px;
-    position: relative; /* Changez pour absolute si nécessaire */
-    left: 50%; /* Déplace à partir du centre */
-    transform: translateX(-50%); /* Centre horizontalement */
-    z-index: 10; /* Assure que l'élément est au-dessus des autres */
+    position: relative;
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 10; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,27 +132,245 @@ li:hover {
 	color: white;
 }
 
-/* MODAL */
+/* Container for "Mes Projets" title and the modifier button */
+.portfolio-header {
+	display: flex;
+	justify-content: center; 
+	align-items: baseline; 
+	gap: 15px; 
+	margin-bottom: 20px; 
+  }
+  
+  #modifierButton {
+	background: none; 
+	border: none; 
+	color: black; 
+	font-size: 12px; 
+	display: flex; 
+	align-items: center; 
+	cursor: pointer; 
+	gap: 5px; 
+	padding: 0;
+  }
+  
+  #modifierButton i {
+	font-size: 18px; /* Taille de l'icône */
+  }
 
+
+/*
+================================================================================================================
+// Gestion des modals //
+================================================================================================================
+*/
 .modal {
+	display: none;
+	justify-content: center;
+	align-items: center;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.8);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
+	z-index: 1000;
+  }
+  
+
 .modal-wrapper {
+	width: 630px;
+	height: 700px;
 	background-color: white;
-	max-width: calc(100vh - 20px);
-	max-height: calc(100vh - 20px);
-	width: 600px;
-	padding: 20px;
+	border-radius: 10px; 
+	padding: 60px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+	position: relative; 
+	overflow: hidden; 
+  }
+.modal-wrapper h2 {
+	display: flex;
+	justify-content: space-around;
+	font-family: 'Work Sans';
+    color: black;
+    font-weight: normal;
 
 }
+.close-modal {
+	position: absolute;
+	top: 40px;
+	right: 40px;
+	font-size: 16px;
+	color: black;
+	cursor: pointer;
+  }
+.close-modal:hover {
+	color: red;
+  }
+.modal-gallery {
+	display: grid;
+	justify-content: center;
+	gap: 30px 8px;
+	justify-items: center; 
+	padding: 45px 0;
+	grid-template-columns: repeat(5, 80px)
+  }
+  
+.modal-gallery img {
+  width: 100%;
+  max-width: 80px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.close-modal:hover {
+	color: #1d6154; 
+  }
+
+.modal-image-wrapper {
+	position: relative;
+	display: inline-block;
+  }
+  
+
+.delete-button {
+	position: absolute;
+	top: 5px; 
+	right: 5px;
+	background: black;
+	border: none;
+	border-radius: 15%; 
+	padding: 5px;
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+.delete-button i {
+	color: white;
+	font-size: 12px;
+  }
+  
+.delete-button:hover {
+	background: rgba(255, 0, 0, 0.8); 
+	transform: scale(1.1); 
+  }
+  
+.delete-button i:hover {
+	color: #fff; 
+  }
+.modal-separator {
+
+	width: 435px;
+	border: none;
+	border-top: 1px solid;
+	padding: 17px;
+  }
+  
+.modal-button {
+	display: block;
+	margin: 0 auto;
+	padding: 10px 50px;
+	font-family: 'Syne';
+	font-size: 15px;
+	color: #fff;
+	background-color: #1d6154; 
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+  }
+  
+.modal-button:hover {
+	background-color: #144d3e; 
+	transform: scale(1.05); 
+  }
+  
+#backToModal1 {
+	position: absolute;
+	top: 40px; 
+	left: 40px; 
+	font-size: 23px;
+	color: #333; 
+	cursor: pointer;
+}
+
+#backToModal1:hover {
+	color: #1d6154; 
+}
+
+/* Conteneur pour l'upload */
+.upload-container {
+	background-color: #e8f1f6;
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    border-radius: 5px;
+    margin: 50px;
+  }
+  
+  /* Icône de l'image */
+  .upload-icon {
+	font-size: 70px; 
+	color: #b9c5cc; 
+	transition: transform 0.2s ease; 
+  }
+
+/* Style pour le bouton "+ Ajouter photo" */
+
+.upload-button {
+	background-color: #cbd6dc; 
+	color: #4d7b95; 
+	border: none; 
+	border-radius: 25px;
+	padding: 10px 20px; 
+	font-size: 14px;
+	font-family: 'Arial', sans-serif; 
+	cursor: pointer; 
+	margin-top: 10px;
+	transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+  
+  /* Effet au survol */
+.upload-button:hover {
+	background-color: #b9c5cc; 
+	transform: scale(1.05); 
+}
+
+/* Formulaire de la modal */
+.upload-form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px; 
+	padding: 30px;
+}
+  
+  /* Labels */
+  .upload-form label {
+	font-size: 14px;
+	font-weight: bold;
+	color: #333;
+}
+  
+  /* Champs de texte et liste déroulante */
+  .upload-form input,
+  .upload-form select {
+	align-items: center;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 14px;
+	width: 100%;
+	box-sizing: border-box; /* Inclure le padding dans la largeur */
+}
+  
+  /* Placeholder en gris */
+  .upload-form input::placeholder {
+	color: #aaa;
+}
+  
 #introduction {
 	display: flex;
 	align-items: center;
